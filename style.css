@@ -1,39 +1,96 @@
-/* MOCKUP DO IPHONE 16 */
-.iphone-frame {
-    width: 330px;
-    margin: 0 auto;
-    padding: 20px;
-    background: #000;
-    border-radius: 45px;
-    border: 6px solid #222;
-    box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
-    position: relative;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f3f3;
 }
 
-/* DYNAMIC ISLAND */
+header {
+    background: #6a00ff;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header button {
+    padding: 8px 15px;
+    border-radius: 10px;
+    border: none;
+    background: white;
+    font-weight: bold;
+}
+
+main {
+    display: flex;
+    height: calc(100vh - 80px);
+}
+
+/* --- COLUNA DA ESQUERDA --- */
+#components {
+    width: 20%;
+    padding: 20px;
+    background: white;
+    border-right: 1px solid #ccc;
+}
+
+#components button {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+/* --- CENTRO: iPhone --- */
+#viewer {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Moldura do iPhone 16 */
+.iphone-frame {
+    width: 330px;
+    background: #000;
+    border-radius: 45px;
+    padding: 20px 15px;
+    border: 4px solid #222;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
+}
+
+/* Dynamic Island */
 .dynamic-island {
     width: 110px;
     height: 28px;
     background: black;
     border-radius: 30px;
-    margin: 0 auto;
-    margin-bottom: 12px;
+    margin: 0 auto 15px auto;
 }
 
-/* TELA DO APLICATIVO */
+/* Tela interna */
 #screen {
     width: 100%;
     height: 520px;
     background: white;
     border-radius: 30px;
-    overflow: auto;
     border: 1px solid #ccc;
+    overflow-y: auto;
     padding: 15px;
+    color: black;
 }
 
-/* CENTRALIZAR NO CELULAR */
-#viewer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* --- DIREITA: editor --- */
+#editor {
+    width: 30%;
+    padding: 20px;
+    background: white;
+    border-left: 1px solid #ccc;
+}
+
+#editor textarea {
+    width: 100%;
+    height: 90%;
+    padding: 10px;
+    font-size: 16px;
 }
