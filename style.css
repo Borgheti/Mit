@@ -1,0 +1,39 @@
+/* MOCKUP DO IPHONE 16 */
+.iphone-frame {
+    width: 330px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #000;
+    border-radius: 45px;
+    border: 6px solid #222;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
+    position: relative;
+}
+
+/* DYNAMIC ISLAND */
+.dynamic-island {
+    width: 110px;
+    height: 28px;
+    background: black;
+    border-radius: 30px;
+    margin: 0 auto;
+    margin-bottom: 12px;
+}
+
+/* TELA DO APLICATIVO */
+#screen {
+    width: 100%;
+    height: 520px;
+    background: white;
+    border-radius: 30px;
+    overflow: auto;
+    border: 1px solid #ccc;
+    padding: 15px;
+}
+
+/* CENTRALIZAR NO CELULAR */
+#viewer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
