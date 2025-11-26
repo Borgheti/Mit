@@ -1,88 +1,54 @@
-let components = [];
-let selectedId = null;
+let selectedComponent = null;
 
-function addComponent(type) {
-    const id = Date.now().toString();
-    const div = document.createElement("div");
-
-    div.className = "component";
-    div.innerText = type;
-    div.dataset.id = id;
-
-    div.onclick = () => selectComponent(id);
-
-    document.getElementById("screen").appendChild(div);
-
-    components.push({
-        id,
-        type,
-        code: ""
-    });
+/* Criar componentes */
+function addLabel() {
+    const el = document.createElement("p");
+    el.innerText = "Novo Label";
+    el.onclick = () => selectComponent(el);
+    document.getElementById("screen").appendChild(el);
 }
 
-function selectComponent(id) {
-    selectedId = id;
-    const comp = components.find(c => c.id === id);
-    document.getElementById("codeArea").value = comp.code;
+function addButton() {
+    const el = document.createElement("button");
+    el.innerText = "Botão";
+    el.onclick = () => selectComponent(el);
+    document.getElementById("screen").appendChild(el);
 }
 
-function applyCode() {
-    if (!selectedId) return alert("Selecione um componente!");
+function addInput() {
+    const el = document.createElement("input");
+    el.placeholder = "Digite aqui...";
+    el.onclick = () => selectComponent(el);
+    document.getElementById("screen").appendChild(el);
+}
 
-    const comp = components.find(c => c.id === selectedId);
-    comp.code = document.getElementById("codeArea").value;
+/* EDITAR COMPONENTE */
+function selectComponent(el) {
+    selectedComponent = el;
+    document.getElementById("codeArea").value = el.outerHTML;
+}
 
-    // executar o código do componente
-    try {
-        eval(comp.code);
-        alert("Código aplicado!");
-    } catch (e) {
-        alert("Erro no código: " + e);
+/* Atualiza componente com o código do editor */
+document.getElementById("codeArea").addEventListener("input", () => {
+    if (selectedComponent) {
+        selectedComponent.outerHTML = document.getElementById("codeArea").value;
     }
-}
+});
 
+/* Salvar projeto */
 function saveProject() {
-    const data = JSON.stringify(components);
-    const blob = new Blob([data], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "projeto.json";
-    a.click();
+    const data = document.getElementById("screen").innerHTML;
+    localStorage.setItem("meuProjetoMIT", data);
+    alert("Projeto salvo!");
 }
 
+/* Carregar projeto */
 function loadProject() {
-    const input = document.createElement("input");
-    input.type = "file";
-
-    input.onchange = (e) => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-
-        reader.onload = () => {
-            components = JSON.parse(reader.result);
-            renderLoadedProject();
-        };
-
-        reader.readAsText(file);
-    };
-
-    input.click();
-}
-
-function renderLoadedProject() {
-    const screen = document.getElementById("screen");
-    screen.innerHTML = "";
-
-    components.forEach(comp => {
-        const div = document.createElement("div");
-        div.className = "component";
-        div.innerText = comp.type;
-        div.dataset.id = comp.id;
-
-        div.onclick = () => selectComponent(comp.id);
-
-        screen.appendChild(div);
-    });
+    const data = localStorage.getItem("meuProjetoMIT");
+    if (data) {
+        document.getElementById("screen").innerHTML = data;
+        alert("Projeto carregado!");
+    } else {
+        alert("Nenhum projeto salvo.");
+    }
 }
